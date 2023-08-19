@@ -1,0 +1,27 @@
+.list {
+  @apply inline-flex h-[2.5rem] items-center justify-center rounded-[.375rem] bg-muted p-[.25rem] text-muted-foreground;
+}
+
+.trigger {
+  @apply inline-flex items-center justify-center whitespace-nowrap rounded-[.125rem] px-[.75rem] py-[.375rem] text-[.875rem] font-[500] leading-[1.25rem] ring-offset-background transition-all;
+
+  &:is-focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2;
+  }
+
+  &:is-disabled {
+    @apply pointer-events-none opacity-50;
+  }
+
+  &[data-active-item] {
+    @apply bg-background text-foreground shadow-sm;
+  }
+}
+
+.content {
+  @apply mt-[.5rem] ring-offset-background;
+
+  &:is-focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2;
+  }
+}
