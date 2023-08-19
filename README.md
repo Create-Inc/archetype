@@ -4,7 +4,7 @@ The design system **system**.
 
 ## Introduction
 
-Building a design system is hard. Among other things, you have to care about...
+Building a design system is hard. Among other things, you have to take care of...
 
 - Boilerplate and tooling.
 - Design tokens.
@@ -30,7 +30,7 @@ The principles behind Archetype are:
 
 ## What you get
 
-By using Archetype, you'll build a **design system package** that you can use in any React project. This package will provide design tokens, high-quality and composable components, and documentation.
+By using Archetype, you'll build a **design system package** that you can use in any React project. This package will provide design tokens, high-quality components, and documentation.
 
 Integrating your package into a project is simple, provided the following:
 
@@ -80,7 +80,7 @@ Icons from many popular icon families. Icons are exported using the Archetype ic
 
 This package sources its icons from the latest version of [React Icons](https://react-icons.github.io/react-icons), so all of its families are included.
 
-> Full credit goes to `React Icons` for the excellent compilation of icons and icon families.
+> Full credit goes to `React Icons` for the excellent compilation of icons and icon families, and to the original authors of the icons for their work.
 
 [Learn more.](./packages/archetype-icons/README.md)
 
