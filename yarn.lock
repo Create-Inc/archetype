@@ -1617,7 +1617,6 @@ __metadata:
     "@typescript-eslint/parser": ^6.2.1
     "@vitejs/plugin-react-swc": ^3.0.0
     autoprefixer: 10.4.14
-    clsx: ^1
     date-fns: ^2.30.0
     eslint: ^8.47.0
     eslint-plugin-import: ^2.27.5
@@ -6094,7 +6093,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"clsx@npm:^1, clsx@npm:^1.2.1":
+"clsx@npm:^1.2.1":
   version: 1.2.1
   resolution: "clsx@npm:1.2.1"
   checksum: 30befca8019b2eb7dbad38cff6266cf543091dae2825c856a62a8ccf2c3ab9c2907c4d12b288b73101196767f66812365400a227581484a05f968b0307cfaf12
