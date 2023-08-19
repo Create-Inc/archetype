@@ -1,0 +1,23 @@
+.card {
+  @apply rounded-[.5rem] border bg-card text-card-foreground shadow-sm;
+}
+
+.header {
+  @apply flex flex-col space-y-[.375rem] p-[1.5rem];
+}
+
+.title {
+  @apply text-[1.5rem] font-[600] leading-[1] tracking-[-0.025rem];
+}
+
+.description {
+  @apply text-[.875rem] leading-[1.25rem] text-muted-foreground;
+}
+
+.content {
+  @apply p-[1.5rem] pt-0;
+}
+
+.footer {
+  @apply flex items-center p-[1.5rem] pt-0;
+}

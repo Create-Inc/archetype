@@ -1,0 +1,49 @@
+.toggle {
+  @apply inline-flex cursor-pointer items-center justify-center rounded-[.375rem] text-[.875rem] font-[500] leading-[1.25rem] ring-offset-background transition-colors;
+
+  &:is-targeted {
+    @apply bg-muted text-muted-foreground;
+  }
+
+  &:is-focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2;
+  }
+
+  &:is-disabled {
+    @apply pointer-events-none opacity-50;
+  }
+
+  &[data-checked="true"] {
+    @apply bg-accent text-accent-foreground;
+  }
+
+  &[data-size="default"] {
+    @apply h-[2.5rem] px-[.75rem];
+  }
+
+  &[data-size="sm"] {
+    @apply h-[2.25rem] px-[.625rem];
+  }
+
+  &[data-size="lg"] {
+    @apply h-[2.75rem] px-[1.25rem];
+  }
+
+  &[data-variant="default"] {
+    &[data-checked="false"]:not(:is-targeted) {
+      @apply bg-transparent;
+    }
+  }
+
+  &[data-variant="outline"] {
+    @apply border border-input;
+
+    &[data-checked="false"]:not(:is-targeted) {
+      @apply bg-transparent;
+    }
+
+    &:is-targeted {
+      @apply bg-accent text-accent-foreground;
+    }
+  }
+}

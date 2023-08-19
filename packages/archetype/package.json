@@ -1,0 +1,62 @@
+{
+  "name": "@createinc/archetype",
+  "version": "0.0.10",
+  "license": "MIT",
+  "sideEffects": false,
+  "type": "module",
+  "exports": {
+    "./archetype.css": "./archetype.css",
+    "./tailwind.css": "./tailwind.css",
+    ".": "./dist/index.js",
+    "./scope": "./scope/index.js",
+    "./better-states": "./better-states/index.js"
+  },
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "better-states",
+    "dist",
+    "scope",
+    "archetype.css",
+    "tailwind.css"
+  ],
+  "scripts": {
+    "build": "yarn build:core && yarn build:postcss-all-plugins",
+    "build:core": "tsup src/index.ts --format esm --dts",
+    "build:postcss-all-plugins": "yarn build:postcss-better-states-plugin && yarn build:postcss-scope-plugin",
+    "build:postcss-better-states-plugin": "tsup --entry.postcss-better-states-plugin src/postcss-better-states-plugin/index.ts --format cjs --dts",
+    "build:postcss-scope-plugin": "tsup --entry.postcss-scope-plugin src/postcss-scope-plugin/index.ts --format cjs --dts"
+  },
+  "dependencies": {
+    "@ariakit/react": "^0.2.15",
+    "lodash": "^4.17.21",
+    "postcss": "^8",
+    "postcss-selector-parser": "^6.0.13",
+    "react-usestateref": "^1.0.8",
+    "tailwindcss": "^3.3.0",
+    "ts-toolbelt": "^9.6.0"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.189",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "@typescript-eslint/eslint-plugin": "^6.2.1",
+    "@typescript-eslint/parser": "^6.2.1",
+    "eslint": "^8.47.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-simple-import-sort": "^10.0.0",
+    "prettier": "^2.8.8",
+    "prettier-plugin-jsdoc": "^0.4.2",
+    "tsup": "^6.7.0",
+    "typescript": "^5.1.6"
+  },
+  "peerDependencies": {
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

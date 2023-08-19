@@ -1,0 +1,26 @@
+.checkbox {
+  @apply shrink-0 border border-primary;
+  @apply flex items-center justify-center text-current;
+  @apply h-[1rem] w-[1rem] rounded-[.25rem];
+
+  &:is-disabled {
+    @apply opacity-50;
+  }
+
+  &:is-focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+  }
+
+  &[data-checked="true"] {
+    @apply bg-primary text-primary-foreground;
+  }
+}
+
+.check {
+  @apply h-[1rem] w-[1rem];
+  @apply relative top-[.0625rem];
+
+  .checkbox:not([data-checked="true"]) & {
+    @apply opacity-0;
+  }
+}

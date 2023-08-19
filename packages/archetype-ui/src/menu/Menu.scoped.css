@@ -1,0 +1,96 @@
+.popover {
+  @apply z-50 min-w-[8rem] border bg-popover text-popover-foreground shadow-md;
+  @apply rounded-[.375rem] p-[.25rem];
+  @apply max-h-[--popover-available-height] overflow-auto outline-none;
+
+  /* TODO: this is a workaround for Ariakit + tailwindcss-animate issues */
+  animation-fill-mode: forwards;
+  @apply opacity-0;
+  &:is([data-enter], [data-leave]) {
+    @apply opacity-100;
+  }
+
+  &[data-enter] {
+    @apply animate-in fade-in-0 zoom-in-95;
+  }
+
+  &[data-leave] {
+    @apply animate-out fade-out-0 zoom-out-95;
+  }
+
+  &[data-side="top"] {
+    @apply slide-in-from-bottom-2;
+  }
+
+  &[data-side="bottom"] {
+    @apply slide-in-from-top-2;
+  }
+
+  &[data-side="left"] {
+    @apply slide-in-from-right-2;
+  }
+
+  &[data-side="right"] {
+    @apply slide-in-from-left-2;
+  }
+
+  &[data-system-styles] {
+    @apply min-w-[12rem] overflow-hidden;
+  }
+
+  &[data-nested] {
+    @apply min-w-[8rem] overflow-hidden;
+  }
+}
+
+.heading {
+  @apply select-none px-[.5rem] py-[.375rem] text-[.875rem] font-[600] leading-[1.25rem];
+
+  &[data-inset] {
+    @apply pl-[2rem];
+  }
+}
+
+.item {
+  @apply flex cursor-default select-none items-center outline-none transition-colors;
+  @apply rounded-[.25rem] px-[.5rem] py-[.375rem] text-[.875rem] leading-[1.25rem];
+  @apply gap-[.5rem];
+
+  &[data-active-item] {
+    @apply bg-accent text-accent-foreground;
+  }
+
+  &[aria-disabled="true"] {
+    @apply pointer-events-none opacity-50;
+  }
+
+  &[data-inset] {
+    @apply pl-[2rem];
+  }
+
+  & .icon {
+    @apply h-[1rem] w-[1rem];
+  }
+
+  & .content {
+    @apply grow;
+  }
+
+  & .check {
+    @apply flex h-[1rem] w-[1rem] items-center justify-center;
+
+    & svg {
+      @apply h-[.5rem] w-[.5rem] fill-current;
+    }
+  }
+
+  & .shortcut {
+    @apply ml-auto opacity-60;
+    @apply text-[.75rem] leading-[1rem] tracking-[.1rem];
+  }
+}
+
+.separator {
+  @apply h-px bg-muted;
+  @apply mx-[-.25rem] my-[.25rem];
+}

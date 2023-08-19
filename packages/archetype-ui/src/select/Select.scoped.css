@@ -1,0 +1,98 @@
+.input {
+  @apply block w-full rounded-[.375rem] border border-input bg-background;
+
+  &[data-is-placeholder] {
+    @apply text-muted-foreground;
+  }
+
+  &:is-focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+  }
+
+  &:is-disabled {
+    @apply opacity-50;
+  }
+
+  & .inputLabel {
+    @apply flex h-[2.5rem] w-full items-center justify-between gap-[.5rem] px-[.75rem] py-[.5rem] text-[.875rem] leading-[1.25rem];
+
+    & .text {
+      @apply grow truncate text-start;
+    }
+
+    & .icon {
+      @apply h-[1rem] w-[1rem] opacity-50;
+    }
+  }
+}
+
+.popover {
+  @apply relative z-50 overflow-auto rounded-[.375rem] border bg-popover p-[.25rem] text-popover-foreground shadow-md outline-none;
+  @apply max-h-[--popover-available-height];
+  @apply min-w-[8rem];
+
+  /* TODO: this is a workaround for Ariakit + tailwindcss-animate issues */
+  animation-fill-mode: forwards;
+  @apply opacity-0;
+  /* leave animation is currently disabled due to the Ariakit bug */
+  /* &:is([data-enter], [data-leave]) { */
+  &:is([data-enter]) {
+    @apply opacity-100;
+  }
+
+  &[data-enter] {
+    @apply animate-in fade-in-0 zoom-in-95;
+  }
+
+  &[data-leave] {
+    @apply animate-out fade-out-0 zoom-out-95;
+  }
+
+  &[data-side="top"] {
+    @apply slide-in-from-bottom-[.5rem];
+  }
+
+  &[data-side="bottom"] {
+    @apply slide-in-from-top-[.5rem];
+  }
+
+  &[data-side="left"] {
+    @apply slide-in-from-right-[.5rem];
+  }
+
+  &[data-side="right"] {
+    @apply slide-in-from-left-[.5rem];
+  }
+}
+
+.separator {
+  @apply -mx-[.25rem] my-[.25rem] h-px bg-muted;
+}
+
+.groupLabel {
+  @apply select-none py-[.375rem] pl-[2rem] pr-[.5rem] text-[.875rem] font-[600] leading-[1.25rem];
+}
+
+.item {
+  @apply flex w-full select-none items-center gap-[.625rem] rounded-[.25rem] px-[.5rem] py-[.375rem] text-[.875rem] leading-[1.25rem] outline-none;
+
+  &[data-active-item] {
+    @apply bg-accent text-accent-foreground;
+  }
+
+  &:is-disabled {
+    @apply opacity-50;
+  }
+
+  & .icon {
+    @apply h-[.875rem] w-[.875rem];
+  }
+
+  &:not([data-selected="true"]) .icon {
+    @apply opacity-0;
+  }
+
+  & .content {
+    @apply grow;
+  }
+}
