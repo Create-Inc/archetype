@@ -1,0 +1,7 @@
+{
+  "name": "@createinc/archetype-ui",
+  "private": true,
+  "sideEffects": false,
+  "module": "../dist/tailwind-tokens.js",
+  "types": "../dist/tailwind-tokens.d.ts"
+}

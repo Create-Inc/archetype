@@ -1,0 +1,17 @@
+.menubar {
+  @apply inline-flex items-center border bg-background;
+  @apply h-[2.5rem] space-x-[.25rem] rounded-[.375rem] p-[.25rem];
+}
+
+.button {
+  @apply flex cursor-default select-none items-center;
+  @apply rounded-[.125rem] px-[.75rem] py-[.375rem] text-[.875rem] font-[500] leading-[1.25rem] outline-none;
+
+  &:is-targeted {
+    @apply bg-accent text-accent-foreground;
+  }
+
+  &[aria-expanded="true"] {
+    @apply bg-accent text-accent-foreground;
+  }
+}

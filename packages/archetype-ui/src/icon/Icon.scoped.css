@@ -1,0 +1,8 @@
+.icon {
+  @apply flex-shrink-0;
+
+  :where(&) {
+    width: var(--at-icon-width);
+    height: var(--at-icon-height);
+  }
+}

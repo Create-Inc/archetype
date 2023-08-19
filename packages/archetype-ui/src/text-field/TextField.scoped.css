@@ -1,0 +1,23 @@
+.input {
+  @apply flex h-[2.5rem] w-full rounded-[.375rem] border border-input bg-background px-[.75rem] py-[.5rem] text-[.875rem] leading-[1.25rem] ring-offset-background;
+
+  ._dark & {
+    color-scheme: dark;
+  }
+
+  &::file-selector-button {
+    @apply border-0 bg-transparent text-[.875rem] font-[500] leading-[1.25rem] text-foreground;
+  }
+
+  &::placeholder {
+    @apply text-muted-foreground;
+  }
+
+  &:focus {
+    @apply outline-none ring-2 ring-ring ring-offset-2;
+  }
+
+  &:disabled {
+    @apply opacity-50;
+  }
+}
