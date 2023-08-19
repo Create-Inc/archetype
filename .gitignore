@@ -2,7 +2,7 @@ node_modules
 
 .vscode
 
-.yarn/*
+.yarn
 !.yarn/cache
 !.yarn/patches
 !.yarn/plugins
