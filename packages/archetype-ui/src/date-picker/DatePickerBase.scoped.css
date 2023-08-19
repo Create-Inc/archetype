@@ -1,0 +1,15 @@
+.trigger {
+  @apply justify-start text-left font-[400];
+
+  &:not([data-has-value]) {
+    @apply text-muted-foreground;
+  }
+}
+
+.icon {
+  @apply mr-[.5rem] h-[1rem] w-[1rem];
+}
+
+.popover {
+  @apply w-auto p-0;
+}

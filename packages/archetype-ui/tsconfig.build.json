@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig",
+  "exclude": ["**/*.stories.*"],
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "declaration": true
+  }
+}

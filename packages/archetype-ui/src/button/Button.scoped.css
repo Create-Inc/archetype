@@ -1,0 +1,87 @@
+.button {
+  @apply inline-flex items-center  transition-colors;
+  @apply rounded-[.375rem] text-[.875rem]  leading-[1.25rem];
+  @apply select-none gap-[.5rem];
+
+  :where(&) {
+    @apply justify-center font-[500];
+  }
+
+  &:is-disabled {
+    @apply pointer-events-none opacity-50;
+  }
+
+  &:is-focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+  }
+
+  /* sizes */
+
+  &[data-size="default"] {
+    @apply h-[2.5rem] px-[1rem] py-[.5rem];
+  }
+
+  &[data-size="sm"] {
+    @apply h-[2.25rem] px-[.75rem];
+  }
+
+  &[data-size="lg"] {
+    @apply h-[2.75rem] px-[2rem];
+  }
+
+  &[data-size="icon"] {
+    @apply h-[2.5rem] w-[2.5rem];
+  }
+
+  /* variants */
+
+  &[data-variant="primary"] {
+    @apply bg-primary text-primary-foreground;
+
+    &:is-targeted {
+      @apply bg-primary/90;
+    }
+  }
+
+  &[data-variant="destructive"] {
+    @apply bg-destructive text-destructive-foreground;
+
+    &:is-targeted {
+      @apply bg-destructive/90;
+    }
+  }
+
+  &[data-variant="outline"] {
+    @apply border border-input bg-background;
+
+    &:is-targeted {
+      @apply bg-accent text-accent-foreground;
+    }
+  }
+
+  &[data-variant="secondary"] {
+    @apply bg-secondary text-secondary-foreground;
+
+    &:is-targeted {
+      @apply bg-secondary/80;
+    }
+  }
+
+  &[data-variant="ghost"] {
+    &:is-targeted {
+      @apply bg-accent text-accent-foreground;
+    }
+  }
+
+  &[data-variant="link"] {
+    @apply text-primary underline-offset-4;
+
+    &:is-targeted {
+      @apply underline;
+    }
+  }
+}
+
+.icon {
+  @apply h-[1.25rem] w-[1.25rem];
+}

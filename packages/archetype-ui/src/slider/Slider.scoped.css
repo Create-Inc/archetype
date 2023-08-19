@@ -1,0 +1,24 @@
+.slider {
+  @apply relative flex w-full touch-none select-none items-center;
+
+  &._Mui-disabled {
+    @apply opacity-50;
+  }
+}
+
+.track {
+  @apply relative h-[.5rem] w-full grow overflow-hidden rounded-full bg-secondary;
+}
+
+.range {
+  @apply absolute h-full rounded-full bg-primary;
+}
+
+.thumb {
+  @apply block h-[1.25rem] w-[1.25rem] rounded-full border-[.125rem] border-primary bg-background outline-none transition-colors;
+  @apply absolute ml-[-.375rem];
+
+  &._Mui-focusVisible {
+    @apply ring-2 ring-ring ring-offset-2 ring-offset-background;
+  }
+}
