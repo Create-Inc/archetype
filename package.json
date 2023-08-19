@@ -8,6 +8,7 @@
     "build": "yarn workspaces foreach run build",
     "build:core": "yarn workspace @createinc/archetype build:core",
     "build:icons": "yarn workspace @createinc/archetype-icons build",
+    "build:storybook": "yarn workspace @createinc/archetype-ui build:storybook",
     "watch:core": "yarn build:core --watch",
     "dev": "yarn workspace @createinc/archetype-ui dev",
     "gen:icons": "yarn workspace @createinc/archetype-icons gen"
