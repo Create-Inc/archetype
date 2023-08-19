@@ -46,7 +46,6 @@
     "@typescript-eslint/parser": "^6.2.1",
     "@vitejs/plugin-react-swc": "^3.0.0",
     "autoprefixer": "10.4.14",
-    "chokidar": "^3.5.3",
     "eslint": "^8.47.0",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-react-hooks": "^4.6.0",
