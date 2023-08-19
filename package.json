@@ -1,0 +1,27 @@
+{
+  "name": "root",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "yarn workspaces foreach run build",
+    "build:core": "yarn workspace @createinc/archetype build:core",
+    "build:icons": "yarn workspace @createinc/archetype-icons build",
+    "build:storybook": "yarn workspace @createinc/archetype-ui build:storybook",
+    "watch:core": "yarn build:core --watch",
+    "dev": "yarn workspace @createinc/archetype-ui dev",
+    "gen:icons": "yarn workspace @createinc/archetype-icons gen"
+  },
+  "resolutions": {
+    "@types/react": "17.0.64"
+  },
+  "packageManager": "yarn@3.6.2",
+  "devDependencies": {
+    "@types/node": "^20.5.1"
+  },
+  "dependencies": {
+    "react": "^17",
+    "react-dom": "^17"
+  }
+}
