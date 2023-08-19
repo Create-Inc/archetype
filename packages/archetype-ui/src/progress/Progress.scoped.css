@@ -1,7 +1,0 @@
-.progress {
-  @apply relative h-[1rem] w-full overflow-hidden rounded-full bg-secondary;
-}
-
-.indicator {
-  @apply h-full w-full flex-1 bg-primary transition-all;
-}

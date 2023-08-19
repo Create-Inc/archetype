@@ -1,7 +1,0 @@
-.label {
-  @apply text-[.875rem] font-[500] leading-[1];
-
-  &[data-disabled] {
-    @apply opacity-70;
-  }
-}

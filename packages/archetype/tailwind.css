@@ -1,8 +1,0 @@
-@layer reset {
-  @tailwind base;
-}
-
-@layer archetype;
-
-@tailwind components;
-@tailwind utilities;
