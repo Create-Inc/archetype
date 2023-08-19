@@ -1,0 +1,15 @@
+.textarea {
+  @apply flex min-h-[80px] w-full rounded-[.375rem] border border-input bg-transparent px-[.75rem] py-[.5rem] text-[.875rem] leading-[1.25rem] ring-offset-background;
+
+  &::placeholder {
+    @apply text-muted-foreground;
+  }
+
+  &:focus {
+    @apply outline-none ring-2 ring-ring ring-offset-2;
+  }
+
+  &:disabled {
+    @apply opacity-50;
+  }
+}

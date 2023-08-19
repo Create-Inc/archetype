@@ -1,0 +1,42 @@
+.content {
+  /* TODO: this is a workaround for Ariakit + tailwindcss-animate issues */
+  animation-fill-mode: forwards;
+  @apply fixed left-[50%] top-[50%] z-50 grid w-full max-w-[32rem] translate-x-[-50%] translate-y-[-50%] gap-[1rem] border bg-background p-[1.5rem] shadow-lg duration-200 sm:rounded-[.5rem] md:w-full;
+}
+
+.content[data-enter] {
+  @apply animate-in fade-in-0 zoom-in-95 slide-in-from-left-1/2 slide-in-from-top-[48%];
+}
+
+.content[data-leave] {
+  @apply animate-out fade-out-0 zoom-out-95 slide-out-to-left-1/2 slide-out-to-top-[48%];
+}
+
+.heading {
+  @apply flex flex-col space-y-[.375rem] text-center sm:text-left;
+}
+
+.title {
+  @apply text-[1.125rem] font-[600] leading-[1] tracking-[-0.025em];
+}
+
+.description {
+  @apply text-[.875rem] leading-[1.25rem] text-muted-foreground;
+}
+
+.footer {
+  @apply flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-[.5rem];
+}
+
+/* TODO: these styles are global and cause issues with other components */
+/* [data-backdrop] {
+  @apply fixed inset-0 z-50 bg-background/80 backdrop-blur-sm;
+}
+
+[data-backdrop][data-enter] {
+  @apply animate-in fade-in-0;
+}
+
+[data-backdrop][data-leave] {
+  @apply animate-out fade-out-0;
+} */

@@ -1,0 +1,66 @@
+.loadingIndicator {
+  @apply z-10 flex-shrink-0 text-blue-500;
+
+  /* Sizes */
+  &._size-medium {
+    @apply h-[4rem] w-[4rem];
+  }
+
+  &._size-small {
+    @apply h-[2.5rem] w-[2.5rem];
+  }
+
+  /* Variants */
+  &._variant-indeterminate {
+    animation: rotate 2s linear infinite;
+  }
+
+  &._variant-determinate {
+    transform: rotate(180deg);
+  }
+
+  &._is-inverted {
+    @apply text-white;
+  }
+}
+
+.path {
+  @apply stroke-current;
+  stroke-linecap: round;
+
+  /* Variants */
+  ._variant-indeterminate & {
+    animation: dash 1.5s ease-in-out infinite;
+  }
+
+  ._variant-determinate & {
+    stroke-dasharray: 100 100;
+    /* for determinate, animate stroke-dashoffset
+       from 100 (0% progress) to 50 (100% progress) using progress prop */
+    transition: stroke-dashoffset 850ms ease-in-out;
+  }
+}
+
+/* Animations */
+@keyframes dash {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+
+  50% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -35;
+  }
+
+  100% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -51;
+  }
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
