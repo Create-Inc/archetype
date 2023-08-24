@@ -15,7 +15,7 @@ const DEFAULT_PROPS = {
   max: 100,
   getValueLabel: (value: number, max: number) =>
     `${Math.round((value / max) * 100)}%`,
-} as const; // satisfies Partial<ProgressProps>
+} satisfies Partial<ProgressProps>;
 
 /**
  * A progress bar. Rendered as `<div />`.

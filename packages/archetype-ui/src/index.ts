@@ -1,3 +1,4 @@
+export * from "./accordion";
 export * from "./alert";
 export * from "./avatar";
 export * from "./badge";
@@ -21,7 +22,6 @@ export * from "./progress";
 export * from "./radio-group";
 export * from "./select";
 export * from "./separator";
-export * from "./sheet";
 export * from "./skeleton";
 export * from "./slider";
 export * from "./switch";

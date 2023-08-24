@@ -9,18 +9,6 @@ import { type MouseEvent, useState } from "react";
 import { MenuProvider } from "./context";
 import { Menu, type MenuProps } from "./Menu";
 
-export const ContextMenu: Component<ContextMenuProps, Properties> =
-  createComponent((props) => {
-    return (
-      <MenuProvider value={{ systemStyles: true }}>
-        <Menu {...useDefaultStoreProps()} {...props} />
-      </MenuProvider>
-    );
-  });
-
-/** `ContextMenu` props. */
-export type ContextMenuProps = ExtendedProps<MenuProps>;
-
 /**
  * A context menu, typically opened by right-clicking an element. Use it as a
  * replacement for `<Menu />`. Extends `<Menu />`.
@@ -44,6 +32,17 @@ export type ContextMenuProps = ExtendedProps<MenuProps>;
  * </>;
  * ```
  */
+export const ContextMenu: Component<ContextMenuProps, Properties> =
+  createComponent((props) => {
+    return (
+      <MenuProvider value={{ systemStyles: true }}>
+        <Menu {...useDefaultStoreProps()} {...props} />
+      </MenuProvider>
+    );
+  });
+
+/** `ContextMenu` props. */
+export type ContextMenuProps = ExtendedProps<MenuProps>;
 
 // store
 // -----
@@ -52,7 +51,7 @@ function useDefaultStoreProps() {
   const nested = Boolean(Menu.useStoreContext(true));
   return {
     placement: !nested ? "bottom-start" : undefined,
-  } as const; // satisfies Ariakit.MenuStoreProps
+  } satisfies Ariakit.MenuStoreProps;
 }
 
 function useStore(props?: Ariakit.MenuStoreProps) {

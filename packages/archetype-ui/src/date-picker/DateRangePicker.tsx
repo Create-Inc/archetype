@@ -11,7 +11,7 @@ import { DatePickerBase, type DatePickerBaseOptions } from "./DatePickerBase";
 const DEFAULT_RANGE_PROPS = {
   placeholder: "Pick a date range",
   dateFormat: "PP",
-} as const; // satisfies Partial<DateRangePickerProps>
+} satisfies Partial<DateRangePickerProps>;
 
 /**
  * A date range picker. Extends `<Calendar mode="range" />` (which extends

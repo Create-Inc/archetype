@@ -4,7 +4,8 @@ import { type PluginOptionsWithDefaults } from "../options";
 import { applyClassScoping } from "./apply-class-scoping";
 import { applyLayer } from "./apply-layer";
 
-const SCOPE_FROM_FILE_NAME_REGEXP = /\/(?<scope>[a-zA-Z0-9_-]+)\.scoped\.css$/;
+const SCOPE_FROM_FILE_NAME_REGEXP =
+  /[/\\](?<scope>[a-zA-Z0-9_-]+)\.scoped\.css$/;
 
 export function applyScope(rootNode: Root, options: PluginOptionsWithDefaults) {
   // get scope name

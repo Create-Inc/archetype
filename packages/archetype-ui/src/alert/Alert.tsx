@@ -18,7 +18,7 @@ const styles = scopedStyles("Alert");
 
 const DEFAULT_ALERT_PROPS = {
   variant: "default",
-} as const; // satisfies Partial<AlertProps>
+} satisfies Partial<AlertProps>;
 
 /**
  * An alert banner. Rendered as `<section />`.

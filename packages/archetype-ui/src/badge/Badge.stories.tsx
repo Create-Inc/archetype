@@ -15,7 +15,7 @@ export const Playground: Story = {
   args: {
     className: "",
     as: "div",
-    variant: "default",
+    variant: "primary",
     children: "Badge",
     disabled: false,
     href: "https://dio.la/",

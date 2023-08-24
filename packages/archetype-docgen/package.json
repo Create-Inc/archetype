@@ -1,6 +1,6 @@
 {
   "name": "@createinc/archetype-docgen",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "license": "MIT",
   "sideEffects": false,
   "type": "module",
@@ -28,7 +28,7 @@
     "eslint-plugin-simple-import-sort": "^10.0.0",
     "prettier": "^2.8.8",
     "prettier-plugin-jsdoc": "^0.4.2",
-    "tsup": "^6.7.0",
+    "tsup": "^7.2.0",
     "tsx": "^3.12.7",
     "typescript": "^5.1.6"
   },

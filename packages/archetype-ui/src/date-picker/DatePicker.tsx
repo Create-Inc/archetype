@@ -11,7 +11,7 @@ import { DatePickerBase, type DatePickerBaseOptions } from "./DatePickerBase";
 const DEFAULT_PROPS = {
   placeholder: "Pick a date",
   dateFormat: "PPP",
-} as const; // satisfies Partial<DatePickerProps>
+} satisfies Partial<DatePickerProps>;
 
 /**
  * A date picker. Extends `<Calendar mode="single" />` (which extends

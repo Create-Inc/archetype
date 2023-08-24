@@ -201,7 +201,7 @@ function useDefaultStoreProps() {
   return {
     animated: true,
     placement: !nested ? "bottom" : undefined,
-  } as const; // satisfies Ariakit.MenuStoreProps
+  } satisfies Ariakit.MenuStoreProps;
 }
 
 function useStore(props?: Ariakit.MenuStoreProps) {
@@ -278,7 +278,7 @@ interface Properties {
 
 const DEFAULT_POPOVER_PROPS = {
   gutter: 4,
-} as const; // satisfies Partial<MenuPopoverProps>
+} satisfies Partial<MenuPopoverProps>;
 
 const Popover: Component<MenuPopoverProps> = createComponent(
   ({

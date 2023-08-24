@@ -60,7 +60,7 @@ export type HovercardProps = ExtendedProps<
 const DEFAULT_STORE_PROPS = {
   animated: true,
   placement: "bottom",
-} as const; // satisfies Ariakit.HovercardStoreProps
+} satisfies Ariakit.HovercardStoreProps;
 
 function useStore(props?: Ariakit.HovercardStoreProps) {
   return Ariakit.useHovercardStore({ ...DEFAULT_STORE_PROPS, ...props });
@@ -135,7 +135,7 @@ interface Properties {
 
 const DEFAULT_POPOVER_PROPS = {
   gutter: 4,
-} as const; // satisfies Partial<HovercardPopoverProps>
+} satisfies Partial<HovercardPopoverProps>;
 
 const Popover: Component<HovercardPopoverProps> = createComponent(
   ({ gutter = DEFAULT_POPOVER_PROPS.gutter, ...props }) => {

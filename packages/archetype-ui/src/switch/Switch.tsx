@@ -15,7 +15,7 @@ const styles = scopedStyles("Switch");
 
 const DEFAULT_PROPS = {
   size: "md",
-} as const; // satisfies Partial<SwitchProps>
+} satisfies Partial<SwitchProps>;
 
 /**
  * A switch. Extends [`<Ariakit.Checkbox

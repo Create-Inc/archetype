@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 // simple components
@@ -44,13 +45,33 @@ export type ExtendedProps<P, O = unknown> = P extends HTMLTag
  * type ButtonComponent = Component<ButtonProps>;
  * ```
  *
- * @template P Props.
+ * @example
+ *
+ * ```tsx
+ * // generic component
+ * type SelectComponent = Component<
+ *   <T extends Value = Value>(props: SelectProps<T>) => ReactElement | null
+ * >;
+ * ```
+ *
+ * @example
+ *
+ * ```tsx
+ * // component with properties (e.g. compound component)
+ * type MenuComponent = Component<MenuProps, Properties>;
+ *
+ * interface Properties {
+ *   Popover: MenuPopoverComponent;
+ * }
+ * ```
+ *
+ * @template P Props or a function component type (useful for creating generic
+ *   components).
  * @template S Optional component properties (e.g. for compound components).
  */
-export type Component<P, S = unknown> = {
-  (props: P): React.ReactElement | null;
-  displayName?: string;
-} & S;
+export type Component<P, S = unknown> = (P extends Function
+  ? P
+  : { (props: P): React.ReactElement | null }) & { displayName?: string } & S;
 
 // polymorphic components
 // ----------------------

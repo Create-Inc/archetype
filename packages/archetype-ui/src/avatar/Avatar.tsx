@@ -30,7 +30,7 @@ type BackgroundColor = InitialsColor | "image" | "fallback";
 
 const DEFAULT_PROPS = {
   fallbackIcon: luUser,
-} as const; // satisfies Partial<AvatarProps>
+} satisfies Partial<AvatarProps>;
 
 /**
  * An avatar that displays a picture or the initials of a person or entity.

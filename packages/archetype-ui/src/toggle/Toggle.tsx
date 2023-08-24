@@ -16,7 +16,7 @@ const styles = scopedStyles("Toggle");
 const DEFAULT_PROPS = {
   variant: "default",
   size: "default",
-} as const; // satisfies Partial<ToggleProps>
+} satisfies Partial<ToggleProps>;
 
 /**
  * Toggle Component A two-state button that can be either on or off.

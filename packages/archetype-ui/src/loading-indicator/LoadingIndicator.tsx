@@ -14,7 +14,7 @@ const DEFAULT_PROPS = {
   size: "medium",
   variant: "indeterminate",
   isInverted: false,
-} as const; // satisfies Partial<LoadingIndicatorProps>;
+} satisfies Partial<LoadingIndicatorProps>;
 
 /**
  * A LoadingIndicator. Rendered as `<svg />`.
