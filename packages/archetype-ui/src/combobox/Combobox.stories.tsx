@@ -33,6 +33,4 @@ export const Playground: Story = {
       ],
     },
   },
-  args: {},
-  argTypes: {},
 };

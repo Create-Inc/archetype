@@ -10,6 +10,7 @@ import {
   scopedStyles,
 } from "@createinc/archetype";
 import clsx from "clsx";
+import { type ReactElement } from "react";
 
 import { Icon } from "../icon";
 import { luCheck, luChevronDown } from "../icons";
@@ -24,6 +25,11 @@ const { Root, useStoreContext } = createAriakitRoot(
   Ariakit.useSelectStore,
   "Select"
 );
+
+// internal generic component type
+type SelectComponent = <T extends SelectValue = SelectValue>(
+  props: SelectProps<T>
+) => ReactElement | null;
 
 /**
  * A select input.
@@ -60,7 +66,7 @@ const { Root, useStoreContext } = createAriakitRoot(
  *
  * ```tsx
  * // controlled
- * const [value, setValue] = useState<SelectValue>("broccoli");
+ * const [value, setValue] = useState("broccoli");
  * <Select value={value} setValue={setValue}>
  *   ...
  * </Select>;
@@ -105,8 +111,8 @@ const { Root, useStoreContext } = createAriakitRoot(
  * </Select>;
  * ```
  */
-export const Select: Component<SelectProps, Properties> = createComponent(
-  ({ ...props }) => <Root {...DEFAULT_STORE_PROPS} {...props} />
+export const Select: Component<SelectComponent, Properties> = createComponent(
+  (props) => <Root {...DEFAULT_STORE_PROPS} {...props} />
 );
 
 /** `Select` options. */
@@ -119,8 +125,8 @@ export type SelectOptions = {
 };
 
 /** `Select` props. */
-export type SelectProps = ExtendedProps<
-  Ariakit.SelectStoreProps,
+export type SelectProps<T extends SelectValue = SelectValue> = ExtendedProps<
+  Ariakit.SelectStoreProps<T>,
   SelectOptions
 >;
 
@@ -137,7 +143,7 @@ const DEFAULT_STORE_PROPS = {
   animated: true,
   placement: "bottom",
   defaultValue: SELECT_NO_VALUE,
-} as const; // satisfies Ariakit.SelectStoreProps
+} satisfies Ariakit.SelectStoreProps;
 
 function useStore(props?: Ariakit.SelectStoreProps) {
   return Ariakit.useSelectStore({ ...DEFAULT_STORE_PROPS, ...props });
@@ -195,7 +201,7 @@ function getSelectInputLabel(store: Ariakit.SelectStore, placeholder: string) {
 
 const DEFAULT_INPUT_PROPS = {
   placeholder: "No items selected",
-} as const; // satisfies Partial<SelectInputProps>
+} satisfies Partial<SelectInputProps>;
 
 const Input: Component<SelectInputProps> = createComponent(
   ({ placeholder = DEFAULT_INPUT_PROPS.placeholder, children, ...props }) => {
@@ -303,7 +309,7 @@ interface Properties {
 const DEFAULT_POPOVER_PROPS = {
   gutter: 4,
   sameWidth: true,
-} as const; // satisfies Partial<SelectPopoverProps>
+} satisfies Partial<SelectPopoverProps>;
 
 const Popover: Component<SelectPopoverProps> = createComponent(
   ({

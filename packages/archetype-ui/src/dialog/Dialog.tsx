@@ -2,13 +2,6 @@ import "./Dialog.scoped.css";
 
 import * as Ariakit from "@ariakit/react";
 import {
-  Dialog as AriakitDialog,
-  DialogDescription as AriakitDialogDescription,
-  DialogDisclosure as AriakitDialogDisclosure,
-  DialogDismiss as AriakitDialogDismiss,
-  DialogHeading as AriakitDialogHeading,
-} from "@ariakit/react";
-import {
   type Component,
   createAriakitRoot,
   createComponent,
@@ -17,6 +10,9 @@ import {
   scopedStyles,
 } from "@createinc/archetype";
 import clsx from "clsx";
+
+import { Icon } from "../icon";
+import { luX } from "../icons";
 
 const styles = scopedStyles("Dialog");
 
@@ -28,11 +24,8 @@ const { Root, useStoreContext } = createAriakitRoot(
   "Dialog"
 );
 
-// dialog (compound)
-// -----------------
-
 /**
- * A dialog.
+ * A dialog. It can be displayed as a sheet with `variant="sheet"`.
  *
  * @example
  *
@@ -41,16 +34,56 @@ const { Root, useStoreContext } = createAriakitRoot(
  *   <Dialog.Disclosure>
  *     <Button>Open Dialog</Button>
  *   </Dialog.Disclosure>
- *   <Dialog.Content variant="sheet-right">
- *     <Dialog.Heading>Heading</Dialog.Heading>
- *     <Dialog.Description>Description</Dialog.Description>
- *     <Dialog.Dismiss>Dismiss</Dialog.Dismiss>
+ *   <Dialog.Content>
+ *     <Dialog.Header>
+ *       <Dialog.Heading>Heading</Dialog.Heading>
+ *       <Dialog.Description>Description</Dialog.Description>
+ *     </Dialog.Header>
+ *     Content
+ *     <Dialog.Footer>Footer</Dialog.Footer>
+ *   </Dialog.Content>
+ * </Dialog>;
+ * ```
+ *
+ * @example
+ *
+ * ```tsx
+ * // controlled
+ * const [open, setOpen] = useState(false);
+ * <Dialog open={open} setOpen={setOpen}>
+ *   <Dialog.Content>...</Dialog.Content>
+ * </Dialog>;
+ * ```
+ *
+ * @example
+ *
+ * ```tsx
+ * // dismiss button
+ * <Dialog>
+ *   <Dialog.Content>
+ *     ...
+ *     <Dialog.Footer>
+ *       <Dialog.Dismiss>
+ *         <Button>Close dialog</Button>
+ *       </Dialog.Dismiss>
+ *     </Dialog.Footer>
+ *   </Dialog.Content>
+ * </Dialog>;
+ * ```
+ *
+ * @example
+ *
+ * ```tsx
+ * // as sheet (default side is "right")
+ * <Dialog>
+ *   <Dialog.Content variant="sheet" side="top">
+ *     ...
  *   </Dialog.Content>
  * </Dialog>;
  * ```
  */
 export const Dialog: Component<DialogProps, Properties> = createComponent(
-  (props) => <Root animated {...props} />
+  (props) => <Root {...DEFAULT_STORE_PROPS} {...props} />
 );
 
 /** `Dialog` options. */
@@ -68,15 +101,39 @@ export type DialogProps = ExtendedProps<
   DialogOptions
 >;
 
+// store
+// -----
+
+const DEFAULT_STORE_PROPS = {
+  animated: true,
+} satisfies Ariakit.DialogStoreProps;
+
+function useStore(props?: Ariakit.DialogStoreProps) {
+  return Ariakit.useDialogStore({ ...DEFAULT_STORE_PROPS, ...props });
+}
+
+Dialog.useStore = useStore;
 Dialog.useStoreContext = useStoreContext;
 interface Properties {
+  /**
+   * `Dialog` Ariakit store hook. Extends
+   * [`Ariakit.useDialogStore`](https://ariakit.org/reference/use-dialog-store).
+   *
+   * @example
+   *
+   * ```tsx
+   * const dialogStore = Dialog.useStore();
+   * ```
+   */
+  useStore: typeof useStore;
+
   /**
    * `Dialog` Ariakit store context consumer.
    *
    * @example
    *
    * ```tsx
-   * const dialogStore = Dialog.useStore();
+   * const dialogStore = Dialog.useStoreContext();
    * ```
    */
   useStoreContext: typeof useStoreContext;
@@ -87,8 +144,8 @@ interface Properties {
 
 const Disclosure: Component<DialogDisclosureProps> = createComponent(
   ({ children, ...props }) => (
-    <AriakitDialogDisclosure
-      render={renderAsChild(children)}
+    <Ariakit.DialogDisclosure
+      render={renderAsChild(children, { componentName: "Dialog.Disclosure" })}
       store={useStoreContext()}
       {...props}
     />
@@ -110,26 +167,75 @@ interface Properties {
    * @example
    *
    * ```tsx
-   * <Dialog.Disclosure>
-   *   <button>Show dialog</button>
-   * </Dialog.Disclosure>;
+   * <Dialog>
+   *   <Dialog.Disclosure>
+   *     <Button>Settings</Button>
+   *   </Dialog.Disclosure>
+   *   ...
+   * </Dialog>;
    * ```
    */
   Disclosure: typeof Disclosure;
 }
 
-// dialog
-// ------
-const Content: Component<DialogContentProps> = createComponent((props) => (
-  <AriakitDialog
-    store={useStoreContext()}
-    {...props}
-    className={clsx(styles.content, props.className)}
-  />
-));
+// content
+// -------
+
+const DEFAULT_CONTENT_PROPS = {
+  variant: "dialog",
+  side: "right",
+} satisfies Partial<DialogContentProps>;
+
+const Content: Component<DialogContentProps> = createComponent(
+  ({
+    variant = DEFAULT_CONTENT_PROPS.variant,
+    side = DEFAULT_CONTENT_PROPS.side,
+    children,
+    ...props
+  }) => {
+    const store = props.store ?? useStoreContext();
+    const mounted = store.useState("mounted");
+    return mounted ? (
+      <Ariakit.Dialog
+        store={useStoreContext()}
+        backdrop={<div className={styles.backdrop} />}
+        data-variant={variant}
+        data-side={side}
+        {...props}
+        className={clsx(styles.content, props.className)}
+      >
+        {children}
+        <Ariakit.DialogDismiss className={styles.closeButton}>
+          <Icon icon={luX} className={styles.icon} />
+        </Ariakit.DialogDismiss>
+      </Ariakit.Dialog>
+    ) : null;
+  }
+);
+
+/** `Dialog.Content` options. */
+export type DialogContentOptions = {
+  /**
+   * The visual appearance of the dialog.
+   *
+   * @default "dialog"
+   */
+  variant?: "dialog" | "sheet";
+
+  /**
+   * The side in which the sheet will be positioned. Only has effect when
+   * `variant="sheet"` is set.
+   *
+   * @default "right"
+   */
+  side?: "right" | "left" | "top" | "bottom";
+};
 
 /** `Dialog.Content` props. */
-export type DialogContentProps = ExtendedProps<Ariakit.DialogProps>;
+export type DialogContentProps = ExtendedProps<
+  Ariakit.DialogProps,
+  DialogContentOptions
+>;
 
 Dialog.Content = Content;
 interface Properties {
@@ -140,44 +246,76 @@ interface Properties {
    * @example
    *
    * ```tsx
-   * <Dialog.Content>Hello!</Dialog.Content>;
+   * <Dialog>
+   *   ...
+   *   <Dialog.Content>
+   *     <Dialog.Header>
+   *       <Dialog.Heading>Heading</Dialog.Heading>
+   *       <Dialog.Description>Description</Dialog.Description>
+   *     </Dialog.Header>
+   *     Content
+   *   </Dialog.Content>
+   * </Dialog>;
    * ```
    */
   Content: typeof Content;
 }
 
+// header
+// ------
+
+const Header: Component<DialogHeaderProps> = createComponent((props) => (
+  <div {...props} className={clsx(styles.header, props.className)} />
+));
+
+/** `Dialog.Header` props. */
+export type DialogHeaderProps = ExtendedProps<"div">;
+
+Dialog.Header = Header;
+interface Properties {
+  /**
+   * The header of the dialog. Rendered as `<div />`.
+   *
+   * @example
+   *
+   * ```tsx
+   * <Dialog.Content>
+   *   <Dialog.Header>
+   *     <Dialog.Heading>Heading</Dialog.Heading>
+   *     <Dialog.Description>Description</Dialog.Description>
+   *   </Dialog.Header>
+   *   ...
+   * </Dialog.Content>;
+   * ```
+   */
+  Header: typeof Header;
+}
+
 // heading
 // -------
 
-const Heading: Component<DialogHeadingProps> = createComponent(
-  ({ children, ...props }) => (
-    <AriakitDialogHeading
-      className={styles.heading}
-      render={renderAsChild(children)}
-      store={useStoreContext()}
-      {...props}
-    />
-  )
-);
+const Heading: Component<DialogHeadingProps> = createComponent((props) => (
+  <Ariakit.DialogHeading
+    {...props}
+    className={clsx(styles.heading, props.className)}
+  />
+));
 
-/** `Dialog.Heading` props. */
 export type DialogHeadingProps = ExtendedProps<Ariakit.DialogHeadingProps>;
 
 Dialog.Heading = Heading;
 interface Properties {
   /**
    * A heading for the dialog. Extends [`<Ariakit.DialogHeading
-   * />`](https://ariakit.org/reference/dialog-heading). Rendered as the passed
-   * child if it is a React element. Else, rendered as `<h1 />`.
+   * />`](https://ariakit.org/reference/dialog-heading). Rendered as `<h1 />`.
    *
    * @example
    *
    * ```tsx
-   * <Dialog.Content>
-   *   <Dialog.Heading>
-   *     <h1>Heading</h1>
-   *   </Dialog.Heading>
-   * </Dialog.Content>;
+   * <Dialog.Header>
+   *   <Dialog.Heading>Heading</Dialog.Heading>
+   *   ...
+   * </Dialog.Header>;
    * ```
    */
   Heading: typeof Heading;
@@ -187,12 +325,11 @@ interface Properties {
 // -----------
 
 const Description: Component<DialogDescriptionProps> = createComponent(
-  ({ children, ...props }) => (
-    <AriakitDialogDescription
-      className={styles.description}
-      render={renderAsChild(children)}
+  (props) => (
+    <Ariakit.DialogDescription
       store={useStoreContext()}
       {...props}
+      className={clsx(styles.description, props.className)}
     />
   )
 );
@@ -205,20 +342,45 @@ Dialog.Description = Description;
 interface Properties {
   /**
    * A description for the dialog. Extends [`<Ariakit.DialogDescription
-   * />`](https://ariakit.org/reference/dialog-description). Rendered as the
-   * passed child if it is a React element. Else, rendered as `<p />`.
+   * />`](https://ariakit.org/reference/dialog-description). Rendered as `<p
+   * />`.
+   *
+   * @example
+   *
+   * ```tsx
+   * <Dialog.Header>
+   *   ...
+   *   <Dialog.Description>Description</Dialog.Description>
+   * </Dialog.Header>;
+   * ```
+   */
+  Description: typeof Description;
+}
+
+// footer
+// ------
+
+const Footer: Component<DialogFooterProps> = createComponent((props) => (
+  <div {...props} className={clsx(styles.footer, props.className)} />
+));
+
+export type DialogFooterProps = ExtendedProps<"div">;
+
+Dialog.Footer = Footer;
+interface Properties {
+  /**
+   * The footer of the dialog. Rendered as `<div />`.
    *
    * @example
    *
    * ```tsx
    * <Dialog.Content>
-   *   <Dialog.Description>
-   *     <p>Description</p>
-   *   </Dialog.Description>
+   *   ...
+   *   <Dialog.Footer>Footer</Dialog.Footer>
    * </Dialog.Content>;
    * ```
    */
-  Description: typeof Description;
+  Footer: typeof Footer;
 }
 
 // dismiss
@@ -226,8 +388,8 @@ interface Properties {
 
 const Dismiss: Component<DialogDismissProps> = createComponent(
   ({ children, ...props }) => (
-    <AriakitDialogDismiss
-      render={renderAsChild(children)}
+    <Ariakit.DialogDismiss
+      render={renderAsChild(children, { componentName: "Dialog.Dismiss" })}
       store={useStoreContext()}
       {...props}
     />
@@ -240,64 +402,21 @@ export type DialogDismissProps = ExtendedProps<Ariakit.DialogDismissProps>;
 Dialog.Dismiss = Dismiss;
 interface Properties {
   /**
-   * A button that hides the dialog. The passed child will act as the dismiss
-   * button. Extends [`<Ariakit.DialogDismiss
+   * A button that hides the dialog. Extends [`<Ariakit.DialogDismiss
    * />`](https://ariakit.org/reference/dialog-dismiss). Rendered as the passed
    * child.
    *
    * @example
    *
    * ```tsx
-   * <Popover.Content>
-   *   <Popover.Dismiss>
-   *     <button>Dismiss</button>
-   *   </Popover.Dismiss>
-   * </Popover.Content>;
+   * <Dialog.Content>
+   *   ...
+   *   <Dialog.Dismiss>
+   *     <Button>Dismiss</Button>
+   *   </Dialog.Dismiss>
+   *   ...
+   * </Dialog.Content>;
    * ```
    */
   Dismiss: typeof Dismiss;
-}
-
-const Footer: Component<DialogFooterProps> = createComponent((props) => (
-  <div className={styles.footer} {...props} />
-));
-
-export type DialogFooterProps = ExtendedProps<"div">;
-
-Dialog.Footer = Footer;
-interface Properties {
-  /**
-   * A footer for the dialog. Rendered as `<div />`.
-   *
-   * @example
-   *
-   * ```tsx
-   * <Dialog.Footer>
-   *   <Dialog.Dismiss>
-   *     <Button type="submit">Save changes</Button>
-   *   </Dialog.Dismiss>
-   * </Dialog.Footer>;
-   * ```
-   */
-  Footer: typeof Footer;
-}
-
-const Title: Component<DialogTitleProps> = createComponent((props) => (
-  <h1 className={styles.title} {...props} />
-));
-
-export type DialogTitleProps = ExtendedProps<"h1">;
-
-Dialog.Title = Title;
-interface Properties {
-  /**
-   * A title for the dialog. Rendered as `<h1 />`.
-   *
-   * @example
-   *
-   * ```tsx
-   * <Dialog.Title>Title</Dialog.Title>;
-   * ```
-   */
-  Title: typeof Title;
 }

@@ -16,7 +16,7 @@ const styles = scopedStyles("Button");
 const DEFAULT_PROPS = {
   variant: "primary",
   size: "default",
-} as const; // satisfies Partial<ButtonProps>
+} satisfies Partial<ButtonProps>;
 
 /**
  * A button.

@@ -44,6 +44,4 @@ export const Playground: Story = {
       </div>
     );
   },
-  args: {},
-  argTypes: {},
 };

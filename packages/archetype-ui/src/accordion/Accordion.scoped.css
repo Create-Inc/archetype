@@ -1,0 +1,35 @@
+.item {
+  @apply border-b;
+}
+
+.trigger {
+  @apply flex w-full items-center justify-between gap-[.5rem] py-[1rem] font-[500] transition-all;
+
+  &:is-targeted {
+    @apply underline;
+  }
+
+  .icon {
+    @apply h-[1rem] w-[1rem] shrink-0 transition-transform duration-200;
+  }
+
+  &[aria-expanded="true"] .icon {
+    @apply rotate-180;
+  }
+}
+
+.content {
+  @apply overflow-hidden text-[.875rem] leading-[1.25rem] transition-all;
+
+  &[data-enter] {
+    @apply max-h-[var(--accordion-item-max-height)];
+  }
+
+  &[data-leave] {
+    @apply max-h-0;
+  }
+
+  & .inner {
+    @apply pb-[1rem];
+  }
+}

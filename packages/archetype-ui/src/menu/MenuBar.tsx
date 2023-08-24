@@ -91,7 +91,8 @@ MenuBar.useStore = Ariakit.useMenuBarStore;
 MenuBar.useStoreContext = useStoreContext;
 interface Properties {
   /**
-   * `MenuBar` Ariakit store hook.
+   * `MenuBar` Ariakit store hook. Extends
+   * [`Ariakit.useMenuBarStore`](https://ariakit.org/reference/use-menu-bar-store).
    *
    * @example
    *

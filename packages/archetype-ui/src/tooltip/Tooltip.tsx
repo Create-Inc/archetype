@@ -84,7 +84,7 @@ export type TooltipProps = ExtendedProps<
 
 const DEFAULT_STORE_PROPS = {
   animated: true,
-} as const; // satisfies Ariakit.TooltipStoreProps
+} satisfies Ariakit.TooltipStoreProps;
 
 function useStore(props?: Ariakit.TooltipStoreProps) {
   return Ariakit.useTooltipStore({ ...DEFAULT_STORE_PROPS, ...props });

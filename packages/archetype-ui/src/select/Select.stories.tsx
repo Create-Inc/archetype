@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 
 import { withFeatures } from "../../.storybook/utils";
-import { Select, type SelectValue } from "./Select";
+import { Select } from "./Select";
 
 const meta: Meta<typeof Select> = {
   title: "Select",
@@ -190,7 +190,7 @@ withFeatures(Multiple, ["controls"]);
 
 export const Controlled: Story = {
   render: function Render(props) {
-    const [value, setValue] = useState<SelectValue>("blueberry");
+    const [value, setValue] = useState("blueberry");
     return (
       <div className="space-y-[.5rem]">
         <Select value={value} setValue={setValue}>

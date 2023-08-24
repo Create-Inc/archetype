@@ -8,7 +8,7 @@ import { TextField, type TextFieldProps } from "./TextField";
 
 const DEFAULT_PROPS = {
   type: "file",
-} as const; // satisfies Partial<TextFieldProps>
+} satisfies Partial<TextFieldProps>;
 
 /**
  * A file input field. Extends `<TextField />`. Rendered as `<input type="file"

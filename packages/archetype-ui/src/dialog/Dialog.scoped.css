@@ -1,23 +1,151 @@
-.content {
+.backdrop {
+  @apply fixed inset-0 z-50 bg-background/80 backdrop-blur-sm;
+
   /* TODO: this is a workaround for Ariakit + tailwindcss-animate issues */
   animation-fill-mode: forwards;
-  @apply fixed left-[50%] top-[50%] z-50 grid w-full max-w-[32rem] translate-x-[-50%] translate-y-[-50%] gap-[1rem] border bg-background p-[1.5rem] shadow-lg duration-200 sm:rounded-[.5rem] md:w-full;
+  @apply opacity-0;
+  &:is([data-enter], [data-leave]) {
+    @apply opacity-100;
+  }
+
+  &[data-enter] {
+    @apply animate-in fade-in-0;
+  }
+
+  &[data-leave] {
+    @apply animate-out fade-out-0;
+  }
 }
 
-.content[data-enter] {
-  @apply animate-in fade-in-0 zoom-in-95 slide-in-from-left-1/2 slide-in-from-top-[48%];
+.content {
+  @apply fixed z-50 gap-[1rem] bg-background p-[1.5rem] shadow-lg sm:rounded-[.5rem] md:w-full;
+
+  /* TODO: this is a workaround for Ariakit + tailwindcss-animate issues */
+  animation-fill-mode: forwards;
+  @apply opacity-0;
+  &:is([data-enter], [data-leave]) {
+    @apply opacity-100;
+  }
+
+  &[data-enter] {
+    @apply animate-in;
+  }
+
+  &[data-leave] {
+    @apply animate-out;
+  }
+
+  &[data-variant="dialog"] {
+    @apply left-[50%] top-[50%] grid w-full max-w-[32rem] translate-x-[-50%] translate-y-[-50%] border duration-200;
+
+    &[data-enter] {
+      @apply fade-in-0 zoom-in-95 slide-in-from-left-1/2 slide-in-from-top-[48%];
+    }
+
+    &[data-leave] {
+      @apply fade-out-0 zoom-out-95 slide-out-to-left-1/2 slide-out-to-top-[48%];
+    }
+  }
+
+  &[data-variant="sheet"] {
+    @apply transition ease-in-out;
+
+    &[data-enter] {
+      @apply duration-500;
+    }
+
+    &[data-leave] {
+      @apply duration-300;
+    }
+
+    &[data-side="top"] {
+      @apply inset-x-0 top-0 border-b;
+
+      &[data-enter] {
+        @apply slide-in-from-top;
+      }
+
+      &[data-leave] {
+        @apply slide-out-to-top;
+      }
+    }
+
+    &[data-side="bottom"] {
+      @apply inset-x-0 bottom-0 border-t;
+
+      &[data-enter] {
+        @apply slide-in-from-bottom;
+      }
+
+      &[data-leave] {
+        @apply slide-out-to-bottom;
+      }
+    }
+
+    &[data-side="left"] {
+      @apply inset-y-0 left-0 h-full w-3/4 border-r sm:max-w-[24rem];
+
+      &[data-enter] {
+        @apply slide-in-from-left;
+      }
+
+      &[data-leave] {
+        @apply slide-out-to-left;
+      }
+    }
+
+    &[data-side="right"] {
+      @apply inset-y-0 right-0 h-full w-3/4 border-l sm:max-w-sm;
+
+      &[data-enter] {
+        @apply slide-in-from-right;
+      }
+
+      &[data-leave] {
+        @apply slide-out-to-right;
+      }
+    }
+  }
+
+  & .closeButton {
+    @apply absolute right-[1rem] top-[1rem] rounded-[.25rem] opacity-70 transition-opacity focus:outline-none;
+
+    &:is-targeted {
+      @apply opacity-100;
+    }
+
+    &:is-focus-visible {
+      @apply ring-2 ring-ring ring-offset-2 ring-offset-background;
+    }
+
+    &:is-disabled {
+      @apply pointer-events-none;
+    }
+
+    & .icon {
+      @apply h-[1rem] w-[1rem];
+    }
+  }
 }
 
-.content[data-leave] {
-  @apply animate-out fade-out-0 zoom-out-95 slide-out-to-left-1/2 slide-out-to-top-[48%];
+.header {
+  @apply flex flex-col text-center sm:text-left;
+
+  .content[data-variant="dialog"] & {
+    @apply space-y-[.375rem];
+  }
+
+  .content[data-variant="sheet"] & {
+    @apply space-y-[.5rem];
+  }
 }
 
 .heading {
-  @apply flex flex-col space-y-[.375rem] text-center sm:text-left;
-}
+  @apply text-[1.125rem] font-[600];
 
-.title {
-  @apply text-[1.125rem] font-[600] leading-[1] tracking-[-0.025em];
+  .content[data-variant="dialog"] & {
+    @apply leading-[1] tracking-[-.025em];
+  }
 }
 
 .description {
@@ -27,16 +155,3 @@
 .footer {
   @apply flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-[.5rem];
 }
-
-/* TODO: these styles are global and cause issues with other components */
-/* [data-backdrop] {
-  @apply fixed inset-0 z-50 bg-background/80 backdrop-blur-sm;
-}
-
-[data-backdrop][data-enter] {
-  @apply animate-in fade-in-0;
-}
-
-[data-backdrop][data-leave] {
-  @apply animate-out fade-out-0;
-} */

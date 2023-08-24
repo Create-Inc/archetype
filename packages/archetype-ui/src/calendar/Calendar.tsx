@@ -24,7 +24,7 @@ const styles = scopedStyles("Calendar");
 
 const DEFAULT_PROPS = {
   showOutsideDays: true,
-} as const; // satisfies Partial<CalendarProps>
+} satisfies Partial<CalendarProps>;
 
 /**
  * A calendar that supports single, multiple and range selection. Extends

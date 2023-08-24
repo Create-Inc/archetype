@@ -12,7 +12,7 @@ const styles = scopedStyles("TextField");
 
 const DEFAULT_PROPS = {
   type: "text",
-} as const; // satisfies Partial<TextFieldProps>
+} satisfies Partial<TextFieldProps>;
 
 /**
  * A text input field. Rendered as `<input type="text" />`.

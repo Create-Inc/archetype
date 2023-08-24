@@ -13,7 +13,7 @@ const styles = scopedStyles("Separator");
 
 const DEFAULT_PROPS = {
   orientation: "horizontal",
-} as const; // satisfies Partial<SeparatorProps>
+} satisfies Partial<SeparatorProps>;
 
 /**
  * A separator. Rendered as `<hr />`.

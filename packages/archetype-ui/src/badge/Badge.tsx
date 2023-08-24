@@ -15,8 +15,8 @@ import { Icon } from "../icon";
 const styles = scopedStyles("Badge");
 
 const DEFAULT_PROPS = {
-  variant: "default",
-} as const; // satisfies Partial<BadgeProps>;
+  variant: "primary",
+} satisfies Partial<BadgeProps>;
 
 /**
  * A badge.
@@ -76,9 +76,9 @@ export type BadgeOptions = {
   /**
    * The badge's visual appearance.
    *
-   * @default "default"
+   * @default "primary"
    */
-  variant?: "default" | "secondary" | "destructive" | "outline";
+  variant?: "primary" | "secondary" | "destructive" | "outline";
 
   /** The badge's icon. */
   icon?: IconData;
