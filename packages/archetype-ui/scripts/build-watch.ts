@@ -23,7 +23,9 @@ function error(type: "css" | "ts", data: string) {
 }
 
 function startTscWatch() {
-  const tsc = spawn("tsc", ["-w"], { stdio: "pipe" });
+  const tsc = spawn("tsc", ["-w", "-p", "tsconfig.build.json"], {
+    stdio: "pipe",
+  });
   processes.push(tsc);
 
   tsc.stdout.on("data", (data) => {
