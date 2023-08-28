@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import "./Select.scoped.css";
 
 import * as Ariakit from "@ariakit/react";
@@ -116,9 +117,9 @@ export const Select: Component<SelectComponent, Properties> = createComponent(
 );
 
 /** `Select` options. */
-export type SelectOptions = {
+export type SelectOptions<T extends SelectValue = SelectValue> = {
   /** The Ariakit store. */
-  store?: Ariakit.SelectStore;
+  store?: Ariakit.SelectStore<T>;
 
   /** The children. */
   children?: React.ReactNode;
@@ -127,7 +128,7 @@ export type SelectOptions = {
 /** `Select` props. */
 export type SelectProps<T extends SelectValue = SelectValue> = ExtendedProps<
   Ariakit.SelectStoreProps<T>,
-  SelectOptions
+  SelectOptions<T>
 >;
 
 /** `Select` value. */
@@ -142,10 +143,12 @@ export const SELECT_NO_VALUE = "$no-value$";
 const DEFAULT_STORE_PROPS = {
   animated: true,
   placement: "bottom",
-  defaultValue: SELECT_NO_VALUE,
+  defaultValue: SELECT_NO_VALUE as any,
 } satisfies Ariakit.SelectStoreProps;
 
-function useStore(props?: Ariakit.SelectStoreProps) {
+function useStore<T extends SelectValue = SelectValue>(
+  props?: Ariakit.SelectStoreProps<T>
+) {
   return Ariakit.useSelectStore({ ...DEFAULT_STORE_PROPS, ...props });
 }
 

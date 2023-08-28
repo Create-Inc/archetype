@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 
 import { withAction, withFeatures } from "../../.storybook/utils";
-import { Calendar, type CalendarRange } from "./Calendar";
+import { Calendar, type CalendarProps, type CalendarRange } from "./Calendar";
 
-const meta: Meta<typeof Calendar> = {
+const meta: Meta = {
   title: "Calendar",
   component: Calendar,
 };
@@ -13,7 +14,7 @@ export default meta;
 type Story = StoryObj<typeof Calendar>;
 
 export const Playground: Story = {
-  render: function Render(props) {
+  render: function Render(props: CalendarProps) {
     const { mode = "single" } = props;
 
     // default mode
@@ -52,7 +53,7 @@ export const Playground: Story = {
       single: singleProps,
     } as const;
 
-    return <Calendar {...props} {...propsByMode[mode]} />;
+    return <Calendar {...props} {...(propsByMode[mode] as any)} />;
   },
   args: {
     className: "rounded-md border inline-block",

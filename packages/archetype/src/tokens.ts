@@ -207,7 +207,7 @@ function createTypographyPlugin<Font extends string>(
   }
 
   function fontName(name: string) {
-    return `${name === "DEFAULT" ? "" : `-${kebabCase(name)}`}`;
+    return `${name === "DEFAULT" ? "-default" : `-${kebabCase(name)}`}`;
   }
 
   function fontVarName(name: string) {
@@ -232,7 +232,7 @@ function createTypographyPlugin<Font extends string>(
   // fonts
   Object.entries(typography.fonts).forEach(([name, value]) => {
     cssVariables[fontVarName(name)] = String(value);
-    utilities[`.font-at${fontName(name)}`] = {
+    utilities[`.font${fontName(name)}`] = {
       fontFamily: `var(${fontVarName(name)})`,
     };
   });
