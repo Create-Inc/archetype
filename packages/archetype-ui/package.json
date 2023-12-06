@@ -67,7 +67,7 @@
     "tailwindcss-animate": "^1.0.6",
     "tsx": "^3.12.7",
     "typescript": "^5.1.6",
-    "vite": "^4.3.2"
+    "vite": "^4.4.12"
   },
   "peerDependencies": {
     "react": "^17.0.0",
